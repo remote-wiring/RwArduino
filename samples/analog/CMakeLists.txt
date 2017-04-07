@@ -1,0 +1,23 @@
+add_executable(AnalogInOutSerial AnalogInOutSerial.cpp)
+target_link_libraries(AnalogInOutSerial LINK_PUBLIC remote_wiring firmata serial_wiring pthread)
+add_dependencies(AnalogInOutSerial remote_wiring firmata serial_wiring)
+
+add_executable(AnalogInput AnalogInput.cpp)
+target_link_libraries(AnalogInput LINK_PUBLIC remote_wiring firmata serial_wiring pthread)
+add_dependencies(AnalogInput remote_wiring firmata serial_wiring)
+
+add_executable(AnalogWriteMega AnalogWriteMega.cpp)
+target_link_libraries(AnalogWriteMega LINK_PUBLIC remote_wiring firmata serial_wiring pthread)
+add_dependencies(AnalogWriteMega remote_wiring firmata serial_wiring)
+
+add_executable(Calibration Calibration.cpp)
+target_link_libraries(Calibration LINK_PUBLIC remote_wiring firmata serial_wiring pthread)
+add_dependencies(Calibration remote_wiring firmata serial_wiring)
+
+add_executable(Fading Fading.cpp)
+target_link_libraries(Fading LINK_PUBLIC remote_wiring firmata serial_wiring pthread)
+add_dependencies(Fading remote_wiring firmata serial_wiring)
+
+add_executable(Smoothing Smoothing.cpp)
+target_link_libraries(Smoothing LINK_PUBLIC remote_wiring firmata serial_wiring pthread)
+add_dependencies(Smoothing remote_wiring firmata serial_wiring)

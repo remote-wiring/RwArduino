@@ -24,6 +24,26 @@ namespace wiring {
 typedef uint8_t byte;
 
 static inline
+int
+constrain (
+    int value_,
+    int floor_,
+    int ceiling_
+) {
+    int result;
+
+    if ( value_ <= floor_ ) {
+        result = floor_;
+    } else if ( value_ >= ceiling_ ) {
+        result = ceiling_;
+    } else {
+        result = value_;
+    }
+
+    return result;
+}
+
+static inline
 void
 delay (
     size_t ms_
