@@ -78,14 +78,15 @@ map (
 ) {
     const int from_range = (from_high_ - from_low_);
     const int to_range = (to_high_ - to_low_);
+    const int value_offset = (value_ - from_low_);
 
     int result;
 
-    if ( value_ <= from_low_ ) {
+    if ( value_ < from_low_ ) {
         errno = EDOM;
         ::perror("Invalid \"value\" parameter supplied to map function!");
         result = to_low_;
-    } else if ( value_ >= from_high_) {
+    } else if ( value_ > from_high_) {
         errno = EDOM;
         ::perror("Invalid \"value\" parameter supplied to map function!");
         result = to_high_;
@@ -93,8 +94,12 @@ map (
         errno = ERANGE;
         ::perror("Invalid \"from range\", cannot be zero!");
         result = from_low_;
+    } else if ( value_ == from_low_) {
+        result = to_low_;
+    } else if ( value_ == from_high_) {
+        result = to_high_;
     } else {
-        result = (((value_ * to_range) / from_range) + to_low_);
+        result = (((value_offset * to_range) / from_range) + to_low_);
     }
 
     return result;
