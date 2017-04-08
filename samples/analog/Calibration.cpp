@@ -70,11 +70,11 @@ void loop(remote_wiring::RemoteDevice & board) {
   // read the sensor:
   sensorValue = board.analogRead(sensorPin);
 
+  // in case the sensor value is outside the range seen during calibration
+  sensorValue = constrain(sensorValue, sensorMin, sensorMax);
+
   // apply the calibration to the sensor reading
   sensorValue = map(sensorValue, sensorMin, sensorMax, 0, 255);
-
-  // in case the sensor value is outside the range seen during calibration
-  sensorValue = constrain(sensorValue, 0, 255);
 
   // fade the LED using the calibrated value:
   board.analogWrite(ledPin, sensorValue);
