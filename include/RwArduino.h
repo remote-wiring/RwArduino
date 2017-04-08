@@ -23,14 +23,15 @@ namespace wiring {
 
 typedef uint8_t byte;
 
+template <typename T, typename U, typename V>
 static inline
-int
+typename std::common_type<T,U,V>::type
 constrain (
-    int value_,
-    int floor_,
-    int ceiling_
+    T value_,
+    U floor_,
+    V ceiling_
 ) {
-    int result;
+    typename std::common_type<T,U,V>::type result;
 
     if ( value_ <= floor_ ) {
         result = floor_;
@@ -67,20 +68,21 @@ digitalPinToInterrupt (
     return pin_;
 }
 
+template <typename T, typename U, typename V, typename W, typename X>
 static inline
-int
+typename std::common_type<T,U,V,W,X>::type
 map (
-    int value_,
-    int from_low_,
-    int from_high_,
-    int to_low_,
-    int to_high_
+    T value_,
+    U from_low_,
+    V from_high_,
+    W to_low_,
+    X to_high_
 ) {
-    const int from_range = (from_high_ - from_low_);
-    const int to_range = (to_high_ - to_low_);
-    const int value_offset = (value_ - from_low_);
+    const typename std::common_type<V,U>::type from_range = (from_high_ - from_low_);
+    const typename std::common_type<X,W>::type to_range = (to_high_ - to_low_);
+    const typename std::common_type<T,U>::type value_offset = (value_ - from_low_);
 
-    int result;
+    typename std::common_type<T,U,V,W,X>::type result;
 
     if ( value_ < from_low_ ) {
         errno = EDOM;
